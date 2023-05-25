@@ -14,14 +14,6 @@ export default function TimelineWaterfall({ data }) {
   const [minDate, setMinDate] = React.useState(undefined);
   const [maxDate, setMaxDate] = React.useState(undefined);
 
-  // const renderChild = (item, index) => {
-  //   return (
-  //     <ItemWrapper key={`node-${index}`} nodeId={item.spanId} event={item}>
-  //       {/* {item?.children && item.children.length && renderChild(item, index)} */}
-  //     </ItemWrapper>
-  //   );
-  // };
-
   React.useEffect(() => {
     setMaxDate(
       new Date(
@@ -46,6 +38,28 @@ export default function TimelineWaterfall({ data }) {
     );
   }, [data]);
 
+  const renderItem = (item, index) => {
+    let random = (Math.random() + 1).toString(36).substring(7);
+    return (
+      <ItemWrapper
+        key={`node-${index}`}
+        nodeId={`${item.spanId}-${random}`}
+        event={item}
+        maxDate={maxDate}
+        minDate={minDate}
+        totalDuration={totalDuration}
+      >
+        {item?.children && item?.children.length ? (
+          <>
+            {item.children.map((child, index) => {
+              return renderItem(child, index);
+            })}
+          </>
+        ) : null}
+      </ItemWrapper>
+    );
+  };
+
   const totalDuration = React.useMemo(() => {
     if (maxDate && minDate) return maxDate.getTime() - minDate.getTime();
     return 0;
@@ -63,22 +77,26 @@ export default function TimelineWaterfall({ data }) {
         {Object.keys(data).map((key, index) => {
           const item = data[key];
           return (
-            <ItemWrapper
-              key={`node-${index}`}
-              nodeId={item.spanId}
-              event={item}
-              maxDate={maxDate}
-              minDate={minDate}
-              totalDuration={totalDuration}
-            >
-              {/* {item?.children && item.children.length && (
-                <ItemWrapper
-                  key={`node-nested-${index}`}
-                  nodeId={item.spanId}
-                  event={item}
-                />
-              )} */}
-            </ItemWrapper>
+            <>{renderItem(item, index)}</>
+            // <ItemWrapper
+            //   key={`node-${index}`}
+            //   nodeId={item.spanId}
+            //   event={item}
+            //   maxDate={maxDate}
+            //   minDate={minDate}
+            //   totalDuration={totalDuration}
+            // >
+            //   {item?.children && item.children.length && (
+            //     <ItemWrapper
+            //       key={`node-${index}`}
+            //       nodeId={item.spanId}
+            //       event={item}
+            //       maxDate={maxDate}
+            //       minDate={minDate}
+            //       totalDuration={totalDuration}
+            //     />
+            //   )}
+            // </ItemWrapper>
           );
         })}
       </TreeView>
