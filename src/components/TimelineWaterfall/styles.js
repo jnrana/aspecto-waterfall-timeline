@@ -9,6 +9,7 @@ export const TitleWrap = styled.div`
 `;
 
 export const TimelineBar = styled.div`
+  position: relative;
   width: ${(props) => `${props.width}%`};
   margin-left: ${(props) => `${props.offset}%`};
   background-color: ${(props) => `${props.color}`};
@@ -49,7 +50,6 @@ export const SkeletonLeft = styled.div`
 export const SkeletonRight = styled.div`
   flex: 0 0 calc(70% - 14px);
   transition: flex 300ms ease 0s;
-  background-color: #ffffff;
 `;
 
 export const ItemLeft = styled.div`
@@ -90,7 +90,7 @@ const SlotHeader = styled.div`
   color: rgb(155, 161, 175);
   position: absolute;
   bottom: 0px;
-  background: rgb(255, 255, 255);
+  /* background: rgb(255, 255, 255); */
   /* left: ${(props) => `calc(${props.index * 16.66}% - 10px)`}; */
   left: ${(props) => `calc(${props.left}% - 16px)`};
 `;
