@@ -14,13 +14,13 @@ export default function TimelineWaterfall({ data }) {
   const [minDate, setMinDate] = React.useState(undefined);
   const [maxDate, setMaxDate] = React.useState(undefined);
 
-  const renderChild = (item, index) => {
-    return (
-      <ItemWrapper key={`node-${index}`} nodeId={item.spanId} event={item}>
-        {/* {item?.children && item.children.length && renderChild(item, index)} */}
-      </ItemWrapper>
-    );
-  };
+  // const renderChild = (item, index) => {
+  //   return (
+  //     <ItemWrapper key={`node-${index}`} nodeId={item.spanId} event={item}>
+  //       {/* {item?.children && item.children.length && renderChild(item, index)} */}
+  //     </ItemWrapper>
+  //   );
+  // };
 
   React.useEffect(() => {
     setMaxDate(

@@ -32,7 +32,6 @@ const Item = React.forwardRef((props, ref) => {
     selected,
     focused,
     handleExpansion,
-    handleSelection,
     preventSelection,
   } = useTreeItem(nodeId);
 
@@ -44,10 +43,6 @@ const Item = React.forwardRef((props, ref) => {
 
   const handleExpansionClick = (event) => {
     handleExpansion(event);
-  };
-
-  const handleSelectionClick = (event) => {
-    handleSelection(event);
   };
 
   const label = useMemo(() => {
