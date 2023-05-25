@@ -90,21 +90,33 @@ const SlotHeader = styled.div`
   color: rgb(155, 161, 175);
   position: absolute;
   bottom: 0px;
-  /* background: rgb(255, 255, 255); */
-  /* left: ${(props) => `calc(${props.index * 16.66}% - 10px)`}; */
   left: ${(props) => `calc(${props.left}% - 16px)`};
 `;
 
 export const Skeleton = ({ totalDuration }) => {
-  const pillars = totalDuration / 100;
+  if (!totalDuration || totalDuration <= 0) return null;
+  console.log("totalDuration : ", totalDuration);
+
+  // Pillar duration in MilliSeconds
+  let pillarWindowMs = 100;
+
+  if (totalDuration > 1000) {
+    pillarWindowMs = 200;
+  }
+  const pillars = totalDuration / pillarWindowMs;
   const pillarWidth = 100 / pillars;
+
+  console.log("pillars : ", pillars);
+
+  const pillarsArr = [...Array(Math.ceil(pillars) + 1).keys()];
+  console.log("pillarsArr : ", pillarsArr);
 
   return (
     <Box sx={{ display: "flex", gap: "23px" }}>
       <SkeletonLeft />
       <SkeletonRight>
         <SkeletonRightWrapper>
-          {[0, 1, 2, 3, 4, 5, 6].map((item, index) => {
+          {pillarsArr.map((item, index) => {
             let left = 0,
               label;
             if (Math.floor(pillars) >= index) {

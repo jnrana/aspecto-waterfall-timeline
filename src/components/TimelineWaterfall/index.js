@@ -76,28 +76,7 @@ export default function TimelineWaterfall({ data }) {
       >
         {Object.keys(data).map((key, index) => {
           const item = data[key];
-          return (
-            <>{renderItem(item, index)}</>
-            // <ItemWrapper
-            //   key={`node-${index}`}
-            //   nodeId={item.spanId}
-            //   event={item}
-            //   maxDate={maxDate}
-            //   minDate={minDate}
-            //   totalDuration={totalDuration}
-            // >
-            //   {item?.children && item.children.length && (
-            //     <ItemWrapper
-            //       key={`node-${index}`}
-            //       nodeId={item.spanId}
-            //       event={item}
-            //       maxDate={maxDate}
-            //       minDate={minDate}
-            //       totalDuration={totalDuration}
-            //     />
-            //   )}
-            // </ItemWrapper>
-          );
+          return <>{renderItem(item, index)}</>;
         })}
       </TreeView>
     </Wrapper>
